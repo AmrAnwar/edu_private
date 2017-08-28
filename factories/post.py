@@ -18,3 +18,4 @@ class PostFactory(factory.DjangoModelFactory):
     content = factory.Faker('text')
     image = factory.django.ImageField(color='red')
     file = factory.django.FileField()
+    type = factory.Iterator(['a', 'b'])
