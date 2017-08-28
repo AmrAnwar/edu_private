@@ -17,11 +17,10 @@ choices_mcq = (
 
 class Unit(models.Model):
     title = models.CharField(max_length=255)
-    note = models.TextField(max_length=255,null = True, blank = True)
+    note = models.TextField(max_length=255, null=True, blank=True)
     slug = models.SlugField(unique=True, null=True, blank=True)
     wait = models.BooleanField(default=False)
     timestamp = models.DateTimeField(auto_now_add=True)
-
 
     class Meta:
         ordering = ["timestamp"]
@@ -57,6 +56,7 @@ class Word(models.Model):
     timestamp = models.DateTimeField(auto_now_add=True)
     # likes = models.ManyToManyField(settings.AUTH_USER_MODEL, blank=True,
     #                                related_name="comment_likes")
+
     class Meta:
         ordering = ["timestamp"]
 

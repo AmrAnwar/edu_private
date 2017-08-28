@@ -73,20 +73,20 @@ def create_slug(instance, new_slug=None):
 def pre_save_post_receiver(sender, instance, *args, **kwargs):
     if not instance.slug:
         instance.slug = create_slug(instance)
-    url = 'https://fcm.googleapis.com/fcm/send'
-    data = {'to': '/topics/answers',
-            'data': {
-                'message_title': '%s' % (instance.title),
-                'message_body': '%s' % (instance.note),
-                'where': 'answers'
-                }
-            }
-    headers = {
-        'Authorization': 'key=AIzaSyC6PljgOsaTz2fULnW8uIY0sYIJ0MrDWDA',
-        'Content-Type': 'application/json',
-    }
-
-    r = requests.post(url, data=json.dumps(data), headers=(headers))
+    # url = 'https://fcm.googleapis.com/fcm/send'
+    # data = {'to': '/topics/tanswers',
+    #         'data': {
+    #             'message_title': '%s' % instance.title,
+    #             'message_body': '%s' % instance.note,
+    #             'where': 'answers'
+    #             }
+    #         }
+    # headers = {
+    #     'Authorization': 'key=AIzaSyC6PljgOsaTz2fULnW8uIY0sYIJ0MrDWDA',
+    #     'Content-Type': 'application/json',
+    # }
+    #
+    # r = requests.post(url, data=json.dumps(data), headers=(headers))
 
 
 pre_save.connect(pre_save_post_receiver, sender=Answer)

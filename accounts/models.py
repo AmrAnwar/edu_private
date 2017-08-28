@@ -32,6 +32,7 @@ class UserProfile(models.Model):
     # class Meta:
     #     ordering = ["username"]
 
+
 def create_profile(sender, instance, **kwargs):
     if kwargs['created']:
             password = generate(8)
