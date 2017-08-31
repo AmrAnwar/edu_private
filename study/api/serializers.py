@@ -31,6 +31,8 @@ part_url = HyperlinkedIdentityField(
 #     view_name='answers-api:edit',
 #     lookup_field='slug',
 # )
+
+
 class DialogSerializer(ModelSerializer):
     class Meta:
         model = models.Dialog
@@ -75,6 +77,7 @@ class ChoicesSerializer(ModelSerializer):
     def get_answer(self, obj):
         return (getattr(obj, (obj.get_answer_display())))
 
+
 class TestSerializer(ModelSerializer):
     choices = SerializerMethodField()
     complete = SerializerMethodField()
@@ -113,9 +116,12 @@ class WordDetailSerializer(ModelSerializer):
     class Meta:
         model = Word
         fields = [
+            'id',
             'name',
             'translation',
+            'users',
         ]
+
 
 class PartDetailFullSerializer(ModelSerializer):
     words = SerializerMethodField()
@@ -224,6 +230,7 @@ class UnitListSerializer(ModelSerializer):
         c_qs = Part.objects.filter(unit=obj)
         parts = PartDetailSerializer(c_qs, many=True).data
         return parts
+
 
 class UnitListV1Serializer(ModelSerializer):
     parts = SerializerMethodField()

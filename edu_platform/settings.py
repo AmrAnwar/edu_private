@@ -156,10 +156,10 @@ REST_FRAMEWORK = {
 
 SITES = {
     "dev": {"domain": "127.0.0.1:8000", "scheme": "http", "name": "localhost"},
-    "pro": {"domain": "educationplatform.pythonanywhere.com", "scheme": "https", "name": "educationplatform"},
+    "pro": {"domain": "mrtawfiq.pythonanywhere.com", "scheme": "https", "name": "educationplatform"},
 }
 
-SITE_ID = "pro"
+SITE_ID = "dev"
 
 headers = {
     'Authorization': 'key=AIzaSyC6PljgOsaTz2fULnW8uIY0sYIJ0MrDWDA',

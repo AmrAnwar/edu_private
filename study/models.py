@@ -56,6 +56,7 @@ class Word(models.Model):
     timestamp = models.DateTimeField(auto_now_add=True)
     # likes = models.ManyToManyField(settings.AUTH_USER_MODEL, blank=True,
     #                                related_name="comment_likes")
+    users = models.ManyToManyField(User, related_name="words")
 
     class Meta:
         ordering = ["timestamp"]

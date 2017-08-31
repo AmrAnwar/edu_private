@@ -1,6 +1,6 @@
 from django.db.models import Q
 from rest_framework.views import APIView
-
+from django.shortcuts import get_object_or_404
 from rest_framework.generics import (
     CreateAPIView,
     DestroyAPIView,
@@ -33,7 +33,7 @@ PartDetailSerializer,
 PartDetailWordSerializer,
 PartDetailTestSerializer,
 )
-
+from django.contrib.auth.models import User
 
 # class UnitDetailAPIView(RetrieveAPIView):
 #     queryset = Unit.objects.all()
@@ -41,10 +41,9 @@ PartDetailTestSerializer,
 #     lookup_field = 'slug'
 
 
-class PartDetailWordsAPIView(RetrieveAPIView):
-    queryset = Part.objects.all()
-    serializer_class = PartDetailWordSerializer
-    lookup_field = 'id'
+class PartDetailWordsAPIView(APIView):
+    def gg
+
 
 
 class PartDetailTestsAPIView(RetrieveAPIView):
@@ -69,6 +68,7 @@ class UnitListAPIViewV1(ListAPIView):
         querset_list = Unit.objects.filter(wait=False)
         return querset_list
 
+
 class PartListAPIView(ListAPIView):
     serializer_class = PartDetailFullSerializer
     pagination_class = PostPageNumberPagination
@@ -90,20 +90,23 @@ class WordListAPIView(APIView):
     def get(self, request, slug=None, format=None):
         part = Part.objects.get(slug=slug)
         queryset = Word.objects.filter(part=part)
-        print queryset
         serializer = WordDetailSerializer(queryset)
         return Response(serializer.data)
 
 
-# class TestListAPIView(APIView):
-#     def get_object(self, slug):
-#         try:
-#             return Part.objects.get(slug=slug)
-#         except Part.DoesNotExist:
-#             raise Http404
-#
-#     def get(self, request, slug=None, format=None):
-#         part = Part.objects.get(slug=slug)
-#         queryset = Word.objects.filter(part=part)
-#         serializer = WordDetailSerializer(queryset, context={'request': request})
-#         return Response(serializer.data)
+class WordStarToggle(APIView):
+    def get(self, request, word_id=None, user_id=None, format=None):
+        word = get_object_or_404(Word, id=word_id)
+        user = get_object_or_404(User, id=user_id)
+        toggle = False
+        if user in word.users.all():
+            word.users.remove(user)
+        else:
+            word.users.add(user)
+            toggle = True
+        word.save()
+        data = {
+            "toggle": toggle,
+        }
+        return Response(data)
+
