@@ -99,3 +99,4 @@ class AskListSerializer(ModelSerializer):
             'edit_url',
     ]
 
+

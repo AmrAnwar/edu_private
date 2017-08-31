@@ -33,12 +33,7 @@ def upload_location(instance, filename):
     return "news/%s/%s" % (new_id, filename)
 
 
-# Create your models here.
-try:
-    first_user = User.objects.all().first()
-    first_user = first_user.id
-except:
-    first_user = 1
+
 
 class Post(models.Model):
     user = models.ForeignKey(User, default=1, null=False)

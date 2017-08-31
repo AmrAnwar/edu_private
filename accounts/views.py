@@ -16,8 +16,12 @@ def group_list(request):
 
 
 def profiles(request, id=None):
+
     group = get_object_or_404(Group, id=id)
     qs = UserProfile.objects.filter(group=group)
+    if request.GET.get('search'):
+        search_id = request.GET.get('search')
+        qs = qs.filter(id=search_id)
     print qs
     context = {
         'group': group,

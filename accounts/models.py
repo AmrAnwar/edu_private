@@ -11,7 +11,6 @@ import string
 
 User = get_user_model()
 
-
 class Group(models.Model):
     title = models.CharField(max_length=10)
 
@@ -23,7 +22,7 @@ class Group(models.Model):
 
 
 class UserProfile(models.Model):
-    group = models.ForeignKey(Group)
+    group = models.ForeignKey(Group, related_name="users_group")
     user = models.OneToOneField(User, default=1, related_name='profile')
     username = models.CharField(max_length=20, default="null")
     password = models.CharField(max_length=25)
@@ -42,10 +41,10 @@ def create_profile(sender, instance, **kwargs):
             user.save()
             instance.user = user
             instance.save()
-
+    instance.user.username = instance.username
+    instance.user.save()
 
 post_save.connect(create_profile, sender=UserProfile)
-
 
 
 def delete_user(sender, instance, **kwargs):

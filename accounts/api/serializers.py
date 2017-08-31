@@ -27,11 +27,12 @@ class UserDetailSerializer(ModelSerializer):
             'email',
             'questions_url',
             'group',
+            'id',
             # 'first_name',
             # 'last_name',
         ]
 
-    def get_group(self,obj):
+    def get_group(self, obj):
         if not obj.is_staff and not obj.is_superuser:
             return "normal"
         else:
