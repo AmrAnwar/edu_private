@@ -159,7 +159,7 @@ SITES = {
     "pro": {"domain": "mrtawfiq.pythonanywhere.com", "scheme": "https", "name": "educationplatform"},
 }
 
-SITE_ID = "dev"
+SITE_ID = "pro"
 
 headers = {
     'Authorization': 'key=AIzaSyC6PljgOsaTz2fULnW8uIY0sYIJ0MrDWDA',
