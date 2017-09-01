@@ -49,6 +49,19 @@ class Part(models.Model):
         return sites_reverse("study-api:part-tests", kwargs={"id": self.id})
 
 
+class WordBank(models.Model):
+    user = models.ForeignKey(User, related_name="word_bank")
+    name = models.CharField(max_length=150)
+    translation = models.CharField(max_length=150)
+    timestamp = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ["timestamp"]
+
+    def __str__(self):
+        return self.name
+
+
 class Word(models.Model):
     name = models.CharField(max_length=150)
     translation = models.CharField(max_length=150)

@@ -3,7 +3,7 @@ from rest_framework.serializers import (
     HyperlinkedIdentityField,
     SerializerMethodField,
 )
-from study.models import Unit, Part, Word, Test
+from study.models import Unit, Part, Word, Test, WordBank
 from study import models
 from django.shortcuts import redirect, reverse
 from accounts.api.serializers import UserDetailSerializer
@@ -120,6 +120,17 @@ class WordDetailSerializer(ModelSerializer):
             'name',
             'translation',
             'users',
+        ]
+
+
+class WordBankDetailSerializer(ModelSerializer):
+    class Meta:
+        model = WordBank
+        fields = [
+            'id',
+            'user',
+            'name',
+            'translation',
         ]
 
 
