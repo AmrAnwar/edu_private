@@ -11,6 +11,7 @@ import string
 
 User = get_user_model()
 
+
 class Group(models.Model):
     title = models.CharField(max_length=10)
 
