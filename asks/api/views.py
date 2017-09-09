@@ -43,6 +43,7 @@ from edu_platform import settings
 #     serializer_class = UserQuestionsSerializer
 #     lookup_field = 'username'
 
+
 class AccountQuestionsAPIView(APIView):
     def get_object(self, username):
         try:
@@ -115,6 +116,12 @@ class AskDeleteAPIView(DestroyAPIView):
     lookup_field = 'id'
 
 
+# class PublicAskListAPIView(ListAPIView):
+#     serializer_class = AskListSerializer
+#     pagination_class = PostPageNumberPagination
+#     queryset = Ask.objects.filter(wait=True).filter(public=True)
+
+
 class AskListAPIView(ListAPIView):
     serializer_class = AskListSerializer
     filter_backends = [SearchFilter, OrderingFilter]
@@ -122,12 +129,9 @@ class AskListAPIView(ListAPIView):
     pagination_class = PostPageNumberPagination
 
     def get_queryset(self, *args, **kwargs):
-        queryset_list = Ask.objects.filter(wait=True) # .filter(image_sender=None).filter(file_sender=None)
-        # query = self.request.GET.get("search")
-        # if query:
-        #     queryset_list = queryset_list.filter(
-        #         Q(title__icontains=query) |
-        #         Q(content__icontains=query) |
-        #         Q(user__username__icontains=query)
-        #     ).distinct()
+        queryset_list = Ask.objects.filter(wait=True)# .filter(image_sender=None).filter(file_sender=None)
+        query = self.request.GET.get("public")
+        print query
+        if query == "True" or query == "true":
+            queryset_list = Ask.objects.filter(wait=False).filter(public=True)
         return queryset_list
