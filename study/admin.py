@@ -80,3 +80,4 @@ admin.site.register(models.Test, TestAdmin)
 
 admin.site.register(models.Word)
 admin.site.register(models.WordBank)
+admin.site.register(models.Exercise)

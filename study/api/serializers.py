@@ -3,11 +3,9 @@ from rest_framework.serializers import (
     HyperlinkedIdentityField,
     SerializerMethodField,
 )
-from study.models import Unit, Part, Word, Test, WordBank
+from study.models import Unit, Part, Word, Test, WordBank, Exercise
 from study import models
-from django.shortcuts import redirect, reverse
-from accounts.api.serializers import UserDetailSerializer
-from django.contrib.sites.shortcuts import get_current_site
+
 
 
 unit_url = HyperlinkedIdentityField(
@@ -134,6 +132,18 @@ class WordBankDetailSerializer(ModelSerializer):
         ]
 
 
+class ExerciseSerializer(ModelSerializer):
+
+    class Meta:
+        model = Exercise
+        fields = [
+            'id',
+            'question',
+            'answer',
+            'type'
+        ]
+
+
 class PartDetailFullSerializer(ModelSerializer):
     words = SerializerMethodField()
     tests = SerializerMethodField()
@@ -155,6 +165,7 @@ class PartDetailFullSerializer(ModelSerializer):
         tests = Test.objects.filter(part=obj)
         tests_ser = TestSerializer(tests, many=True).data
         return tests_ser
+
 
 class PartDetailTestSerializer(ModelSerializer):
     tests = SerializerMethodField()

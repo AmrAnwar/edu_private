@@ -15,6 +15,22 @@ choices_mcq = (
 # Create your models here.
 
 
+class Exercise(models.Model):
+    TYPE = (
+        (1, "Situations"),
+        (2, "Dialog"),
+        (3, "Choices"),
+        (4, "Find the Mistake"),
+        (5, "Article"),  # can't remember the real name
+        (6, "Story"),
+        (7, "Translation"),
+        (8, "Paragraph"),
+    )
+    question = models.TextField()
+    answer = models.TextField()
+    type = models.IntegerField(choices=TYPE)
+
+
 class Unit(models.Model):
     title = models.CharField(max_length=255)
     note = models.TextField(max_length=255, null=True, blank=True)
@@ -132,6 +148,7 @@ def create_slug_unit(instance, new_slug=None):
 def pre_save_post_receiver_unit(sender, instance, *args, **kwargs):
     if not instance.slug:
         instance.slug = create_slug_unit(instance)
+
 
 def create_slug_part(instance, new_slug=None):
     slug = slugify(instance.title)

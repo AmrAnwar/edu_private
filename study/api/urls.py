@@ -1,5 +1,4 @@
 from django.conf.urls import url
-from django.contrib import admin
 
 from .views import (
     UnitListAPIViewV1,
@@ -12,17 +11,17 @@ from .views import (
     WordStarToggle,
     UserPartDetailWordsAPIView,
     WordBankView,
+    ExerciseView
     # TestListAPIView,
 )
-from rest_framework.routers import DefaultRouter
-from django.conf.urls import url, include
 
 # router = DefaultRouter()
 # router.register(r'bank', WordBankView, base_name='bank')
 
 urlpatterns = [
     # url(r'^', include(router.urls)),
-
+    url(r'^exercise/$', ExerciseView.as_view({'get': 'list',
+                                              'post': 'create'})),
     url(r'^bank/$', WordBankView.as_view({'get': 'list',
                                           'post': 'create'})),
 

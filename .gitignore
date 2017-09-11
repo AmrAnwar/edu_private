@@ -100,6 +100,4 @@ ENV/
 .ropeproject
 
 static/
-static_cdn/rest_framework/docs/
-static_cdn/rest_framework/js/coreapi-0.1.0.js
-static_cdn/rest_framework/js/jquery-1.12.4.min.js
+
