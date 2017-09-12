@@ -15,6 +15,20 @@ choices_mcq = (
 # Create your models here.
 
 
+
+
+
+class Exam(models.Model):
+    title = models.CharField(max_length=100)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ["-created_at"]
+
+    def __str__(self):
+        return "exam: %s" % self.title
+
+
 class Exercise(models.Model):
     TYPE = (
         (1, "Situations"),
@@ -26,9 +40,13 @@ class Exercise(models.Model):
         (7, "Translation"),
         (8, "Paragraph"),
     )
+    exam = models.ForeignKey(Exam, default=1)
     question = models.TextField()
     answer = models.TextField()
     type = models.IntegerField(choices=TYPE)
+
+    def __str__(self):
+        return "%s" % self.question
 
 
 class Unit(models.Model):

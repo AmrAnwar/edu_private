@@ -3,7 +3,7 @@ from rest_framework.serializers import (
     HyperlinkedIdentityField,
     SerializerMethodField,
 )
-from study.models import Unit, Part, Word, Test, WordBank, Exercise
+from study.models import Unit, Part, Word, Test, WordBank, Exercise, Exam
 from study import models
 
 
@@ -50,6 +50,7 @@ class MistakeSerializer(ModelSerializer):
             'replace',
             'answer',
         ]
+
 
 class CompleteSerializer(ModelSerializer):
     class Meta:
@@ -140,13 +141,25 @@ class ExerciseSerializer(ModelSerializer):
             'id',
             'question',
             'answer',
-            'type'
+            'exam',
+            'type',
+        ]
+
+
+class ExamSerializer(ModelSerializer):
+
+    class Meta:
+        model = Exam
+        fields = [
+            'title',
+            'id',
         ]
 
 
 class PartDetailFullSerializer(ModelSerializer):
     words = SerializerMethodField()
     tests = SerializerMethodField()
+
     class Meta:
         model = Part
         fields = [
